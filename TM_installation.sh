@@ -32,8 +32,8 @@ systemctl start ssh && systemctl enable ssh
 echo "The SSH service will be start and added to autostart"
 
 # Mandate regime
-pdpl-user -i 63 root
 echo "Max access mode set..."
+pdpl-user -i 63 root
 
 # Cache cleaning
 apt-cache show astra-version
