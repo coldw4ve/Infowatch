@@ -1,4 +1,4 @@
-# Just copy it 
+# Just copy this
 
 wget https://github.com/puzzlejoy/Infowatch/TM_installation.sh
 
