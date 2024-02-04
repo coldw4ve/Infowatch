@@ -16,7 +16,7 @@ fly-admin-ad-client
 
 # TM packages
 "Installing additional packages for IWTM..."
-if apt-get install lsb-release lshw ntp ntpdate gsfonts libnewt0.52 libwmf-bin libwmf0.2-7 libxml2-utils python-newt -y; then echo "Доп пакеты для IWTM успешно установлены"; else echo "Ошибка"; fi;
+if apt-get install lsb-release lshw ntp ntpdate gsfonts libnewt0.52 libwmf-bin libwmf0.2-7 libxml2-utils python-newt -y; then echo "Additional packages for IWTM installed successfully"; else echo "Ooops, error"; fi;
 
 # /etc/hosts change
 echo "Working with the /etc/hosts file..."
