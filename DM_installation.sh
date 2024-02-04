@@ -58,7 +58,7 @@ echo "Done!"
 
 # Platform Installation
 echo "Platform IWDM installation..."
-tar xvf iw_devicemonior_setup*
+tar xvf iw_devicemonitor_setup*
 ./setup.py install
 kubectl get pods -n infowatch 
 kubectl get configmap nginx-config -o yaml -n infowatch > n.yaml
