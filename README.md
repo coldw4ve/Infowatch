@@ -1,6 +1,6 @@
 This is a project dedicated to installing IWTM on ASTRA Linux (take those 100000 social credit)
 
-### Just copy this
+### Just copy and run this
 
 Traffic Monitor installation
 
