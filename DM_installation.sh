@@ -44,7 +44,6 @@ apt-get install postgresql -y
 read -p "Enter PostgreSQL Password: " postgrePass
 sudo -u postgres 
 psql -c "alter user postgres with password '$postgrePass'"
-exit
 echo "PostgreSQL is Done, password is $postgrePass!"
 
 # Sorting IWDM files
@@ -84,7 +83,14 @@ kubectl get secret -n infowatch epeventskeys-central -o 'go-template={{index .da
 mv plca.crt /usr/share/ca-certificates/
 update-ca-certificates
 
-# 
+# Obtaining the platform's public key
+kubectl get secret guardkeys-central -n infowatch -o 'go-template={{index .data "ec256-public.pem"}}' | base64 -d > /opt/iw/dmserver/bin/guard.pem
+curl http://localhost:443/v1/pubkey > /opt/iw/dmserver/bin/guard.pem
+chown -f iwdms:iwdms /opt/iw/dmserver/bin/guard.pem
+systemctl restart iwdms
+
+
+
 
 
 
