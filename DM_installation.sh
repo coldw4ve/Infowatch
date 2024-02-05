@@ -62,6 +62,30 @@ tar xvf iw_devicemonitor_setup*
 ./setup.py install
 kubectl get pods -n infowatch 
 kubectl get configmap nginx-config -o yaml -n infowatch > n.yaml
+nano n.yaml
+kubectl apply -f n.yaml
+kubectl rollout restart deployment webgui-central -n infowatch
+
+# DM Server installation 
+chmod +x ./install.sh
+bash install.sh 
+
+# Certificates check
+read -p "Enter the IP address of the server where you want to copy the file " serverIP
+read -p "Enter the username of the server where you want to copy the file " serverUser
+scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ /home/iwdm/tmca.crt
+mv tmca.crt /usr/local/share/ca-certificates/tmca.crt
+update-ca-certificates
+
+# dont forget to install the IWTM web-server cert, 'cause this is done manually
+
+# EPEVENTS cert
+kubectl get secret -n infowatch epeventskeys-central -o 'go-template={{index .data "tls.crt"}}' | base64 -d > plca.crt
+mv plca.crt /usr/share/ca-certificates/
+update-ca-certificates
+
+# 
+
 
 
 
