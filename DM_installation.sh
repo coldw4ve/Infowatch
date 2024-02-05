@@ -28,7 +28,7 @@ systemctl start ssh && systemctl enable ssh
 echo "The SSH service will be start and added to autostart"
 
 # .NET 6 Installation 
-"Installing .NET, socat and contract..."
+"Installing .NET, socat and conntrack..."
 apt install ca-certificates apt-transport-https -y
 wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null 
 wget https://packages.microsoft.com/config/debian/10/prod.list -O /etc/apt/sources.list.d/microsoft-prod.list 
