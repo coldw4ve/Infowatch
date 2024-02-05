@@ -49,7 +49,7 @@ echo "PostgreSQL is Done, password is $postgrePass!"
 # Sorting IWDM files
 echo "Moving IWDM-installer files..."
 mkdir IWDM/
-unzip *.zip 
+unzip -j *.zip 
 mv i* IWDM/
 cd IWDM/
 echo "Done!"
