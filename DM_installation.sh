@@ -34,6 +34,8 @@ wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | su
 wget https://packages.microsoft.com/config/debian/10/prod.list -O /etc/apt/sources.list.d/microsoft-prod.list 
 apt update 
 apt install dotnet-sdk-6.0 aspnetcore-runtime-6.0 -y
+
+# conntrack, socat
 apt install conntrack -y
 apt install socat -y
 echo "Success!"
@@ -42,14 +44,14 @@ echo "Success!"
 echo "Installation PostgreSQL"
 apt-get install postgresql -y
 read -p "Enter PostgreSQL Password: " postgrePass
-sudo -u postgres 
+sudo su -u postgres 
 psql -c "alter user postgres with password '$postgrePass'"
 echo "PostgreSQL is Done, password is $postgrePass!"
 
 # Sorting IWDM files
 echo "Moving IWDM-installer files..."
 mkdir IWDM/
-unzip -j *.zip 
+unzip *.zip
 mv i* IWDM/
 cd IWDM/
 echo "Done!"
@@ -64,18 +66,14 @@ nano n.yaml
 kubectl apply -f n.yaml
 kubectl rollout restart deployment webgui-central -n infowatch
 
-# DM Server installation 
-chmod +x ./install.sh
-bash install.sh 
-
-# Certificates check
+# TM cert
 read -p "Enter the IP address of the server where you want to copy the file " serverIP
 read -p "Enter the username of the server where you want to copy the file " serverUser
 scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ /home/iwdm/tmca.crt
 mv tmca.crt /usr/local/share/ca-certificates/tmca.crt
 update-ca-certificates
 
-# dont forget to install the IWTM web-server cert, 'cause this is done manually
+# Dont forget to install the IWTM web-server cert, 'cause this is done manually 
 
 # EPEVENTS cert
 kubectl get secret -n infowatch epeventskeys-central -o 'go-template={{index .data "tls.crt"}}' | base64 -d > plca.crt
@@ -84,9 +82,13 @@ update-ca-certificates
 
 # Obtaining the platform's public key
 kubectl get secret guardkeys-central -n infowatch -o 'go-template={{index .data "ec256-public.pem"}}' | base64 -d > /opt/iw/dmserver/bin/guard.pem
-curl http://localhost:443/v1/pubkey > /opt/iw/dmserver/bin/guard.pem
 chown -f iwdms:iwdms /opt/iw/dmserver/bin/guard.pem
 systemctl restart iwdms
+
+# DM Server installation 
+cd /home/iwdm/IWDM
+chmod +x ./install.sh
+bash install.sh 
 
 
 
