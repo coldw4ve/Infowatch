@@ -12,4 +12,4 @@ wget https://github.com/puzzlejoy/Infowatch/blob/main/DM_installation.sh
 
 Data Discovery installation
 
-wget https://github.com/puzzlejoy/Infowatch/blob/main/IWDD_installation.sh
+wget https://github.com/puzzlejoy/Infowatch/blob/main/DD_installation.sh
