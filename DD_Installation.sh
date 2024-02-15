@@ -33,7 +33,7 @@ echo "Success!"
 
 # Sorting IWDD files
 mkdir IWDD/
-read "Enter the unpucking folder name (without extension)" $unpuckingFolder
+read -p "Enter the unpucking folder name (without extension)" unpuckingFolder
 unzip "$unpuckingFolder".zip 
 mv $unpuckingFolder/iw_discovery_setup* /home/iwdm/IWDD
 cd IWDD
