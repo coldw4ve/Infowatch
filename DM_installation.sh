@@ -1,7 +1,6 @@
 #! /bin/bash
 
 # Sources list
-echo "Sourcelist update"
 astraVersion=$(cat /etc/astra_version)
 echo "deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/$astraVersion/repository-base/ 1.7_x86-64 main contrib non-free" > /etc/apt/sources.list
 echo "deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/$astraVersion/repository-extended/ 1.7_x86-64 contrib main non-free " >> /etc/apt/sources.list
@@ -15,7 +14,6 @@ apt update
 fly-admin-ad-client
 
 # /etc/hosts change
-echo "Working with the /etc/hosts file..."
 echo "Enter domain: "; read ADdomain
 urIP=$(ifconfig eth0 | awk '/inet / {split($2, a, ":"); print a[1]}')
 hostname=$(hostname)
@@ -25,7 +23,6 @@ echo "Done!"
 
 # SSH
 systemctl start ssh && systemctl enable ssh
-echo "The SSH service will be start and added to autostart"
 
 # .NET 6 Installation 
 "Installing .NET, socat and conntrack..."
@@ -57,7 +54,6 @@ cd IWDM/
 echo "Done!"
 
 # Platform Installation
-echo "Platform IWDM installation..."
 tar xvf iw_devicemonitor_setup*
 ./setup.py install
 kubectl get pods -n infowatch 
@@ -73,8 +69,6 @@ scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ /home/iwdm/
 mv tmca.crt /usr/local/share/ca-certificates/tmca.crt
 update-ca-certificates
 
-# Dont forget to install the IWTM web-server cert, 'cause this is done manually 
-
 # EPEVENTS cert
 kubectl get secret -n infowatch epeventskeys-central -o 'go-template={{index .data "tls.crt"}}' | base64 -d > plca.crt
 mv plca.crt /usr/share/ca-certificates/
@@ -85,11 +79,9 @@ kubectl get secret guardkeys-central -n infowatch -o 'go-template={{index .data 
 chown -f iwdms:iwdms /opt/iw/dmserver/bin/guard.pem
 systemctl restart iwdms
 
-# DM Server installation 
-cd /home/iwdm/IWDM
-chmod +x ./install.sh
-bash install.sh 
 
+echo "NOW YOU MUST INSTALL IWTM web-server cert, 'cause this is done manually"
+echo "THEN cd /home/iwdm/IWDM && chmod +x ./install.sh && bash install.sh"
 
 
 
