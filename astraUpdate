@@ -1,0 +1,36 @@
+sudo systemctl stop network-manager
+sudo systemctl disable network-manager
+sudo systemctl mask network-manager
+hostnamectl set-hostname astracli.aldpro.lab
+
+echo "deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-base/ 1.7_x86-64  main non-free contrib" > /etc/apt/sources.list
+echo "deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-extended/ 1.7_x86-64  main contrib non-free" >> /etc/apt/sources.list
+
+nano /etc/network/interfaces
+
+# auto eth0
+# iface eth0 inet static
+  # address 192.168.99.11
+  # netmask 255.255.255.0
+  # gateway 192.168.99.1
+  # dns-nameservers 192.168.99.10
+ #  dns-search aldpro.lab
+
+sudo systemctl restart networking
+
+sudo nano /etc/hosts
+# 127.0.0.1 localhost.localdomain localhost
+# 192.168.99.11 astracli.aldpro.lab astracli
+# 127.0.1.1 astracli
+# 51.250.6.116 dl.astralinux.ru
+# 192.168.99.11 ald.aldpro.lab ald
+
+reboot
+
+sudo apt update && sudo apt install astra-update -y && sudo astra-update -A -r -T
+reboot
+
+apt install resolvconf
+nano /etc/resolv.conf
+nameserver 192.168.99.11
+search aldpro.lab
