@@ -1,0 +1,24 @@
+# ippv6 blocking
+([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4})(/([0-9]|[0-9]\d))
+
+
+# when you must blocking some transport numbers (for example ДГВБА-321/Л)
+[А-я|Ё|ё]{5}-([0-9]|[1-9]\d|1\d{2}|2(([0-2]|[4-9])\d|3([0-2]|[4-9]))|3(([0-1]|[3-9])\d|2([0]|[2-9]))|[4-7]\d{2}|800)/[А-Я|Ё]{1,4}
+
+
+      # blocking some numbers starting with M
+      [А|В|Е|К|Н|О|Р|С|Т|У|Х]\d{3}\D{2}(102|02|702)
+      
+      # without 333
+      М([0-2]\d{2}|3(([0-2]|[4-9])\d|3([0-2]|[4-9]))|[4-9]\d{2})\D{2}(102|02|702)
+      
+      # when number starting with M333
+      М333([В|Е|К|М|Н|О|Р|С|Т|У|Х]{2}|(ОА)|[А|В|Е|К|М|Н|Р|С|Т|У|Х]{2})(102|02|702)
+      
+      # for M333AO numbers and without 102
+      М333АО(02|702)
+
+# if you want to exclude some word with different cases (for example: Wednesday"
+[Ww]ednesday
+
+
