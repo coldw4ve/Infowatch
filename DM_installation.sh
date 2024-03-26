@@ -41,7 +41,7 @@ echo "Success!"
 echo "Installation PostgreSQL"
 apt-get install postgresql -y
 read -p "Enter PostgreSQL Password: " postgrePass
-sudo su -u postgres 
+sudo su -U postgres 
 psql -c "alter user postgres with password '$postgrePass'"
 echo "PostgreSQL is Done, password is $postgrePass!"
 
