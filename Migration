@@ -1,0 +1,26 @@
+#About TM Migration
+
+Чтобы пересоздать схему БД на новом сервере, выполните следующие действия:
+
+На сервере Traffic Monitor выполните запрос от имени пользователя iwtm:
+
+select to_char(min(part_date), 'yyyy-mm-dd')
+from tbs_list
+where status in (1,4)
+Запомните результат. Например: 2015-01-20
+Остановите следующие сервисы (а также другие сервисы подключения к БД):
+
+service iwtm stop
+service php-fpm stop
+service nginx stop
+Перейдите в директорию, в которой хранятся схемы базы данных и скрипты их развертывания:
+Для Oracle: /opt/iw/tm5/csw/oracle
+Для PostgreSQL: /opt/iw/tm5/csw/postgres
+Удалите схему:
+
+./uninstall.sh
+В файле database.conf добавьте параметр tbs_start_date. В качестве значения параметра укажите дату, полученную в п. 1. Например:
+Для Oracle: define tbs_start_date = '2015-01-20'
+Для PostgreSQL: \set tbs_start_date '2015-01-20'
+Установите схему с новым параметром: ./install.sh
+Запустите сервисы iwtm: service iwtm start
