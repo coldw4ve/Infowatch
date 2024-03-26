@@ -71,3 +71,5 @@ chmod +x iwtm-installer-7.7.2.136-astra-smolensk-1.7
 
 # if you want to exclude some word with different cases (for example: Wednesday)
 [Ww]ednesday
+
+https://aaa89985533.wordpress.com/
