@@ -1,0 +1,3 @@
+#УДАЛЕНИЕ АГЕНТА
+dpkg --purge iwdm
+dpkg --purge iwdeployagent
