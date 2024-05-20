@@ -43,17 +43,16 @@ echo "Success!"
 echo "Installation PostgreSQL"
 apt-get install postgresql -y
 read -p "Enter PostgreSQL Password: " postgrePass
-sudo su -U postgres 
-psql -c "alter user postgres with password '$postgrePass'"
+sudo su -U postgres psql -c "alter user postgres with password '$postgrePass'"
 echo "PostgreSQL is Done, password is $postgrePass!"
 
 # Sorting IWDM files
 echo "Moving IWDM-installer files..."
-mkdir IWDM/
-unzip *.zip
-mv i* IWDM/
-cd IWDM/
-echo "Done!"
+mkdir IWDM
+mv *.zip IWDM
+cd IWDM
+7z e *.zip
+echo "Done!".
 
 # Platform Installation
 tar xvf iw_devicemonitor_setup*
@@ -67,8 +66,7 @@ kubectl rollout restart deployment webgui-central -n infowatch
 # TM cert
 read -p "Enter the IP address of the server where you want to copy the file " serverIP
 read -p "Enter the username of the server where you want to copy the file " serverUser
-scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ /home/iwdm/tmca.crt
-mv tmca.crt /usr/local/share/ca-certificates/tmca.crt
+scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ /usr/local/share/ca-certificates/tmca.crt
 update-ca-certificates
 
 # EPEVENTS cert
