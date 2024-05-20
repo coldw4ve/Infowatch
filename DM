@@ -66,7 +66,8 @@ kubectl rollout restart deployment webgui-central -n infowatch
 # TM cert
 read -p "Enter the IP address of the server where you want to copy the file " serverIP
 read -p "Enter the username of the server where you want to copy the file " serverUser
-scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ /usr/local/share/ca-certificates/tmca.crt
+scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ ./tmca.crt
+mv tmca.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
 # EPEVENTS cert
