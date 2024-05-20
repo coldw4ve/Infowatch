@@ -31,7 +31,7 @@ wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | su
 wget https://packages.microsoft.com/config/debian/10/prod.list -O /etc/apt/sources.list.d/microsoft-prod.list 
 apt update 
 apt install dotnet-sdk-6.0 aspnetcore-runtime-6.0 -y
-sudo apt install  aspnetcore-* dotnet-* -y
+# sudo apt install  aspnetcore-* dotnet-* -y (the last version, doesn't fit)
 apt update
 
 # conntrack, socat
