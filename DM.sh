@@ -43,7 +43,9 @@ echo "Success!"
 echo "Installation PostgreSQL"
 apt-get install postgresql -y
 read -p "Enter PostgreSQL Password: " postgrePass
-sudo su -U postgres psql -c "alter user postgres with password '$postgrePass'"
+su - postgres 
+psql -c "alter user postgres with password '$postgrePass'"
+exit
 echo "PostgreSQL is Done, password is $postgrePass!"
 
 # Sorting IWDM files
