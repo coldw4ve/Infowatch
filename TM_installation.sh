@@ -48,6 +48,7 @@ cd IWTM
 chmod +x iwtm-installer-7.7.2.136-astra-smolensk-1.7
 ./iwtm-installer-7.7.2.136-astra-smolensk-1.7
 
+# This is regex for TM in case you don't understand how to write them
 
 # IPv6 blocking
 # ([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4}):([0-9|a-f|A-F]{0,4})(/([0-9]|[0-9]\d))
