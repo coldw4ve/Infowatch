@@ -62,6 +62,7 @@ systemctl restart sshd
 apt-cache show astra-version
 apt clean
 echo "Cache cleared..."
+history -c
 
 ./iwtm-installer*
 
