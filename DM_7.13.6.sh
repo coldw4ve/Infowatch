@@ -31,7 +31,6 @@ apt update
 apt install dotnet-aspnetcore-runtime-6.0 -y
 dotnet --info
 
-
 # conntrack, socat
 apt install conntrack -y
 apt install socat -y
@@ -58,6 +57,33 @@ kubectl apply -f n.yaml
 kubectl rollout restart deployment webgui-central -n infowatch
 
 # Server Installation 
+cd /dm
+mkdir SERVER
+mv iwdms.zip SERVER/
+mv install.sh SERVER/
+cd SERVER/
+
+###### CERTS ######
+
+# TM cert
+read -p "Enter the IP address of the server where you want to copy the file " serverIP
+read -p "Enter the username of the server where you want to copy the file " serverUser
+scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ ./tmca.crt
+mv tmca.crt /usr/local/share/ca-certificates/
+update-ca-certificates
+
+# EPEVENTS cert
+kubectl get secret -n infowatch epeventskeys-central -o 'go-template={{index .data "tls.crt"}}' | base64 -d > plca.crt
+mv plca.crt /usr/share/ca-certificates/
+update-ca-certificates
+
+# Obtaining the platform's public key
+kubectl get secret guardkeys-central -n infowatch -o 'go-template={{index .data "ec256-public.pem"}}' | base64 -d > /opt/iw/dmserver/bin/guard.pem
+chown -f iwdms:iwdms /opt/iw/dmserver/bin/guard.pem
+systemctl restart iwdms
+
+echo "NOW YOU MUST INSTALL IWTM web-server cert, 'cause this is done manually"
+echo "THEN chmod +x ./install.sh AND ./install.sh"
 
 
 
