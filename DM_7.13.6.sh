@@ -47,7 +47,7 @@ nano /etc/openssl/openssl.cnf
 # postgresql instalation
 apt-get install postgresql -y
 read -p "Enter PostgreSQL Password: " postgrePass
-su - postgres psql -c "alter user postgres with password '$postgrePass'"
+su -u postgres psql -c "alter user postgres with password '$postgrePass'"
 exit
 
 # Console installation
