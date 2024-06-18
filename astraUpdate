@@ -29,8 +29,6 @@ nano /etc/network/interfaces
   # dns-nameservers 192.168.99.10
  #  dns-search aldpro.lab
 
-sudo systemctl restart networking
-
 sudo nano /etc/hosts
 # 127.0.0.1 localhost.localdomain localhost
 # 192.168.99.11 astracli.aldpro.lab astracli
@@ -38,12 +36,14 @@ sudo nano /etc/hosts
 # 192.168.99.11 dc.aldpro.lab dc
 # 51.250.6.116 dl.astralinux.ru
 
-reboot
+sudo systemctl restart networking
 
 apt install resolvconf
 nano /etc/resolv.conf
 nameserver 192.168.99.11
 search aldpro.lab
+
+reboot
 
 DEBIAN_FRONTEND=noninteractive apt-get install -q -y aldpro-client
 
