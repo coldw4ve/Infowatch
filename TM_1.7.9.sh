@@ -38,7 +38,9 @@ mkdir /distr/
 mv iwtm* /distr/
 mv opt_packages/ /distr/
 cd /distr/
-chmod +x iwtm-installer*
+rm -rf *.md5
+rm -rf *.sha256
+chmod +x iwtm-installer-*
 
 # /etc/systemd/system/rsyslog.service file editing
 cat << EOF > /etc/systemd/system/rsyslog.service
