@@ -17,7 +17,7 @@ sudo nano /etc/apt/preferences.d/aldpro
 # Pin: release n=generic
 # Pin-Priority: 900
 
-sudo apt update
+sudo apt install astra-update -y && sudo astra-update -A -r -T
 
 nano /etc/network/interfaces
 
