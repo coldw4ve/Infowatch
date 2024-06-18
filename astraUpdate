@@ -1,6 +1,7 @@
 sudo systemctl stop network-manager
 sudo systemctl disable network-manager
 sudo systemctl mask network-manager
+
 hostnamectl set-hostname astracli.aldpro.lab
 
 echo "deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-base/ 1.7_x86-64  main non-free contrib" > /etc/apt/sources.list
