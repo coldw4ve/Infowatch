@@ -1,17 +1,9 @@
 #! /bin/bash
 
 # Sources list
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-main/     1.7_x86-64 main contrib non-free
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-update/   1.7_x86-64 main contrib non-free
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-base/     1.7_x86-64 main contrib non-free
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free
+
 apt update
 
-
-# Addition to AD 
-apt-get install fly-admin-ad-client -y
-apt update
-fly-admin-ad-client
 
 # TM packages
 "Installing additional packages for IWTM..."
@@ -35,8 +27,7 @@ echo "Max access mode set..."
 pdpl-user -i 63 root
 
 mkdir /distr
-mv iwtm-installer* /distr
-mv iwtm-postgresql* /distr
+mv iwtm* /distr
 cd /distr
 chmod +x iwtm-installer*
 
@@ -51,18 +42,12 @@ EOF
 
 systemctl daemon-reload
 
-# for graphical installation
-apt-get install xauth
-nano /etc/ssh/sshd_config
-
-# please add X11Forwarding = Yes
-systemctl restart sshd
+systemctl enable sshd && systemctl start sshd
 
 # Cache cleaning
 apt-cache show astra-version
 apt clean
 echo "Cache cleared..."
-history -c
 
 ./iwtm-installer*
 
