@@ -8,6 +8,16 @@ echo "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-main/ 1.7_x
 echo "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-update/ 1.7_x86-64  main contrib non-free" >> /etc/apt/sources.list
 echo "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64//repository-extended/ 1.7_x86-64  main contrib non-free" >> /etc/apt/sources.list
 
+echo -e "deb http://dl.astralinux.ru/aldpro/stable/repository-main/ 2.1.0 main" | sudo tee /etc/apt/sources.list.d/aldpro.list
+echo -e "deb http://dl.astralinux.ru/aldpro/stable/repository-extended/ generic main" | sudo tee -a /etc/apt/sources.list.d/aldpro.list
+
+sudo nano /etc/apt/preferences.d/aldpro
+# Package: *
+# Pin: release n=generic
+# Pin-Priority: 900
+
+sudo apt update
+
 nano /etc/network/interfaces
 
 # auto eth0
@@ -34,4 +44,4 @@ nano /etc/resolv.conf
 nameserver 192.168.99.11
 search aldpro.lab
 
-apt install fly-admin-ald-client
+DEBIAN_FRONTEND=noninteractive apt-get install -q -y aldpro-client
