@@ -25,6 +25,7 @@ urIP=$(ifconfig eth0 | awk '/inet / {split($2, a, ":"); print a[1]}')
 hostname=$(hostname)
 newEntry="$urIP $hostname.$ADdomain $hostname"
 sed -i "2s/.*/$newEntry/" /etc/hosts
+sed -i "4s/51.250.6.116/download.astralinux.ru/" /etc/hosts
 
 # SSH
 systemctl start ssh && systemctl enable ssh
