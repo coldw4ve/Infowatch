@@ -14,6 +14,7 @@ cp /mnt/vmware/VMwareTools-*.tar.gz /tmp/
 cd /tmp
 tar -xzf VMwareTools-*.tar.gz
 ./vmware-tools-distrib/vmware-install.pl 
+cd /home/*
 
 # TM packages
 apt install lsb-release lshw ntp ntpdate gsfonts libjemalloc2 libnewt0.52 libwmf-bin libwmf0.2-7 libxml2-utils liblzf1 python-newt redis-server redis-tools
@@ -32,7 +33,7 @@ systemctl start ssh && systemctl enable ssh
 pdpl-user -i 63 root
 
 # TM files movement
-7z x *.zip
+7z e *.zip
 mkdir /distr/
 mv iwtm* /distr/
 mv opt_packages/ /distr/
