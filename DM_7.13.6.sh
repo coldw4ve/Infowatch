@@ -34,16 +34,19 @@ apt install socat -y
 echo "Success!"
 apt updat
 
+# files movement
+7z e *.zip
+mkdir /dm
+mv iw* /dm
+mv install* /dm
+cd /dm
+
 # postgresql instalation
 apt-get install postgresql -y
 read -p "Enter PostgreSQL Password: " postgrePass
 sudo -u postgres psql -c "alter user postgres with password '$postgrePass'"
-exit
 
 # Console installation
-mkdir /dm
-mv iw_devicemonitor_setup* /dm
-cd /dm
 tar xvf iw_devicemonitor_setup*
 python2 ./setup.py install
 kubectl get pods -n infowatch 
