@@ -80,7 +80,7 @@ update-ca-certificates
 
 # EPEVENTS cert
 kubectl get secret -n infowatch epeventskeys-central -o 'go-template={{index .data "tls.crt"}}' | base64 -d > plca.crt
-mv plca.crt /usr/share/ca-certificates/
+mv plca.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
 # Obtaining the platform's public key
