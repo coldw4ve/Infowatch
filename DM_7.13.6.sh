@@ -1,10 +1,6 @@
 #! /bin/bash
 
 # Sources list
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-main/     1.7_x86-64 main contrib non-free
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-update/   1.7_x86-64 main contrib non-free
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-base/     1.7_x86-64 main contrib non-free
-deb http://download.astralinux.ru/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free
 apt update
 
 # Addition to AD 
@@ -28,21 +24,15 @@ apt install ca-certificates apt-transport-https -y
 wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null 
 wget https://packages.microsoft.com/config/debian/10/prod.list -O /etc/apt/sources.list.d/microsoft-prod.list 
 apt update 
-apt install dotnet-aspnetcore-runtime-6.0 -y
+apt install dotnet-sdk-6.0 -y
+pt install aspnetcore-runtime-6.0 -y
 dotnet --info
 
 # conntrack, socat
 apt install conntrack -y
 apt install socat -y
 echo "Success!"
-apt update
-
-apt install python2.7
-apt install python-modules-json
-apt install python-modules-distutils
-apt install python-modules-sqlite3
-
-nano /etc/openssl/openssl.cnf 
+apt updat
 
 # postgresql instalation
 apt-get install postgresql -y
