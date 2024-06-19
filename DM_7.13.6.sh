@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# this script is based on https://kb.infowatch.com/pages/viewpage.action?pageId=208870596
+
 # Sources list
 apt update
 
@@ -25,7 +27,7 @@ wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | su
 wget https://packages.microsoft.com/config/debian/10/prod.list -O /etc/apt/sources.list.d/microsoft-prod.list 
 apt update 
 apt install dotnet-sdk-6.0 -y
-pt install aspnetcore-runtime-6.0 -y
+apt install aspnetcore-runtime-6.0 -y
 dotnet --info
 
 # conntrack, socat
@@ -52,6 +54,11 @@ python2 ./setup.py install
 kubectl get pods -n infowatch 
 kubectl get configmap nginx-config -o yaml -n infowatch > n.yaml
 nano n.yaml
+#location /api_dm {
+#    rewrite /api_dm/(.+) /$1 break;
+#    proxy_pass https://SERVER_IP_ADRESS:15007;
+#    proxy_set_header Cookie $http_cookie;
+#}
 kubectl apply -f n.yaml
 kubectl rollout restart deployment webgui-central -n infowatch
 
