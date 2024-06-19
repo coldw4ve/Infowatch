@@ -78,6 +78,12 @@ scp $serverUser@$serverIP:/opt/iw/tm5/etc/cert/trusted_certificates/ ./tmca.crt
 mv tmca.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
+# IF TM cert isnt valide
+# UPDATE "Settings"
+# SET "Value" = 'True'
+# WHERE "Name" = 'IGNORE_SSLERR_TMCONFIG_CONNECTION';
+#THIS SHOULD WORK IF YOU BELIEVE THE DOCUMENTATION BUT IT DOESN'T WORK
+
 # EPEVENTS cert
 kubectl get secret -n infowatch epeventskeys-central -o 'go-template={{index .data "tls.crt"}}' | base64 -d > plca.crt
 mv plca.crt /usr/local/share/ca-certificates/
