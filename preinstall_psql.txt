@@ -1,0 +1,24 @@
+sudo apt update
+sudo apt install postgresql-11 postgresql-contrib
+sudo systemctl status postgresql
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+sudo nano /etc/postgresql/11/main/postgresql.conf
+Найдите и настройте следующие параметры в зависимости от ваших требований:
+listen_addresses: указывает на какие IP-адреса сервер должен слушать. Для прослушивания всех интерфейсов используйте:
+listen_addresses = '*'
+port: порт для соединений PostgreSQL (по умолчанию 5432).
+max_connections: максимальное количество одновременных подключений.
+Настройка pg_hba.conf:
+Откройте файл pg_hba.conf для редактирования:
+Copy code
+sudo nano /etc/postgresql/11/main/pg_hba.conf
+add host    all             all             0.0.0.1/0            trust
+sudo systemctl restart postgresql
+sudo -i -u postgres
+psql
+CREATE USER iwdmadmin WITH PASSWORD 'xxXX1234';
+CREATE DATABASE iwdm OWNER iwdmadmin;
+GRANT ALL PRIVILEGES ON DATABASE iwdm TO iwdmadmin;
+\q
+
