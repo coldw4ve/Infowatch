@@ -74,4 +74,14 @@ chmod +x iwtm-installer-7.7.2.136-astra-smolensk-1.7
 # [Ww]ednesday
 
 
-# 
+# reisi i neschastliviye nomera gruzov
+# naprimer: kdO-666-Д или jfd-13-Ш
+# [A-z]{3}-(1000|[7-9]]\d{2}|6([7-9]\d|6([0-5]|[7-9])|[0-5]\d)|[1-5]\d{2}|[2-9]\d|1([0-2]|[4-9])|\d)-[А-ЯЁ]
+
+# t0rr3n7 and m4gN3t
+# magnet:\?([a-z]{2})(.)urn:([A-z0-9]{20,44})
+# ([A-zА-я0-9]{1-40}).torrent
+
+# bd usloviye obnar
+# 5 + 7 + 14 + 16 + 18
+
